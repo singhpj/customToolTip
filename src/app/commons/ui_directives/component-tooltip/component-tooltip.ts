@@ -10,4 +10,3 @@ export enum ComponentTooltipThemes {
     LIGHT = 'light',
     DEFAULT = 'dark'
 }
-

@@ -1,4 +1,9 @@
 
-<div class="tooltip" [ngClass]="['tooltip_'+position]" [style.left]="moveLeft+'px'" [style.top]="moveTop+'px'">
-  <ng-container *ngComponentOutlet="getComponent"></ng-container>
+<div id="tooltipContanier" class="tooltip show" [attr.data-height]="getMoveTop"
+     [ngClass]="['tooltip_'+position]"
+     [style.left]="getMoveLeft+'px'"
+     [style.top]="getMoveTop+'px'"
+     [style]="'--custHeight:'+(getMoveTop )+'px; --custWidth:'+(getMoveLeft)+'px'"
+>
+  <ng-container *ngComponentOutlet="getComponent ; injector: this.injectorData" ></ng-container>
 </div>

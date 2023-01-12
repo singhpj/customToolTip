@@ -1,0 +1,35 @@
+#demo{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  //overflow: auto ;
+  max-height: 600px;
+  max-width: 400px;
+  //min-height: 0;
+  padding: 12px;
+  .profile_image{
+    max-height: 100px;
+    max-width: 100px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    align-items: center;
+
+    img{
+      max-height: 100px;
+      max-width: 100px;
+      height: 100px;
+      width: 100px;
+    }
+  }
+  .details{
+    .title{
+      text-align: center;
+    }
+    .content{
+      word-break: break-word;
+      text-align: justify;
+    }
+  }
+}

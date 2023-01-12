@@ -8,8 +8,8 @@ export class ComponentTooltipDirective {
   private componentRef: any = null;
   private userData: any = null;
   private position: 'above' | 'below' | 'left' | 'right' = 'below';
-  private showDelay: number = 0
-  private hideDelay:number = 1
+  private showDelay: number = 0 // get value in second
+  private hideDelay:number = 1 // get value in second
 
   @Input() set componentTooltip(values: {
     component: any,
@@ -22,6 +22,7 @@ export class ComponentTooltipDirective {
       this.position = values.position?values.position:'below';
       this.showDelay = values.showDelay?values.showDelay:0;
       this.hideDelay = values.hideDelay?values.hideDelay:1
+      this.userData = values?.userData
   }
   toolTipRef:ComponentRef<any>|null  = null
   timer: number = 0;
@@ -35,7 +36,11 @@ export class ComponentTooltipDirective {
   mouseEnter():void {
     this.createToolTip()
   }
-
+  @HostListener('touchstart',['$event'])
+  Touch($event: TouchEvent):void {
+    $event.preventDefault()
+    this.createToolTip()
+  }
   @HostListener('mouseleave')
   mouseLeave(): void {
     this.hideTooltip = true
@@ -47,16 +52,14 @@ export class ComponentTooltipDirective {
 
   createToolTip(): void{
     this.viewContainerRef.clear()
+    window.setTimeout(()=>{
     this.toolTipRef = this.viewContainerRef.createComponent(ComponentTooltipComponent)
-    this.toolTipRef.location.nativeElement.style.color = "green"
     this.setTooltipProperties()
 
     this.hideTooltip = false
     this.timer = window.setInterval(() => {
       if (this.hideTooltip) {
         this.destroyTooltip()
-        this.viewContainerRef.clear()
-        window.clearInterval(this.timer)
       }
     },this.hideDelay * 100)
     this.toolTipRef.location.nativeElement.onmouseover = () => {
@@ -65,14 +68,14 @@ export class ComponentTooltipDirective {
     this.toolTipRef.location.nativeElement.onmouseleave = () => {
       this.hideTooltip = true
     }
+    }, this.showDelay * 100)
   }
 
   private setTooltipProperties() {
     if (this.componentRef != null) {
       let moveLeft, moveTop = 0
 
-      const { left, right, top, bottom } = this.elementRef.nativeElement.getBoundingClientRect();
-      console.log(left, right, top, bottom, this.position)
+      const { left, right, top, bottom} = this.elementRef.nativeElement.getBoundingClientRect();
       switch (this.position) {
         case 'below': {
           moveLeft = Math.round((right - left) / 2 + left);
@@ -105,12 +108,15 @@ export class ComponentTooltipDirective {
         moveLeft: moveLeft,
         moveTop: moveTop
       })
+
     }
 
   }
 
   destroyTooltip(): void{
     this.toolTipRef?.destroy()
+    this.viewContainerRef.clear()
+    window.clearInterval(this.timer)
   }
 }
 
