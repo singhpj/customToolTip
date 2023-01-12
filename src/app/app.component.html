@@ -1,0 +1,27 @@
+
+<div class="container">
+  <h3>Select Position</h3>
+  <div class="position_container">
+    <div class="radio_option" (click)="position = 'below'">
+      <input type="radio" name="position" [(ngModel)]="position" value="below"/>
+      <label for="below">Below</label>
+    </div>
+    <div class="radio_option" (click)="position = 'above'">
+      <input type="radio" name="position" [(ngModel)]="position" value="above"/>
+      <label for="above">Above</label>
+    </div>
+    <div class="radio_option"  (click)="position = 'left'">
+      <input type="radio" name="position" [(ngModel)]="position" value="left"/>
+      <label for="left">Left</label>
+    </div>
+    <div class="radio_option"  (click)="position = 'right'">
+      <input type="radio" name="position" [(ngModel)]="position" value="right"/>
+      <label for="right">Right</label>
+    </div>
+
+  </div>
+
+  <div class="tool_tip_display_section">
+    <p [componentTooltip]="{component:template,  userData:['name'],position:position }">Some text goes here</p>
+  </div>
+</div>
