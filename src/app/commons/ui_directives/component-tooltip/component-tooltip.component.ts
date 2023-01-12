@@ -17,7 +17,6 @@ export class ComponentTooltipComponent implements OnInit {
   injectorData: Injector =  Injector.NULL;
   viewPortWidthHalf = window.innerWidth/2
   @Input() set componentData(val: any) {
-    console.log(val)
     this.viewComponent = val.component
     this.data = val?.data;
     this.position = val?.position;

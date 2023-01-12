@@ -18,7 +18,6 @@ export class ComponentTooltipDirective implements OnDestroy{
     showDelay?: number,
     hideDelay?:number
   }) {
-    console.log(values?.userData)
       this.componentRef = values?.component;
       this.position = values.position?values.position:'below';
       this.showDelay = values.showDelay?values.showDelay:0;
