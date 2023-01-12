@@ -14,20 +14,25 @@ export class ComponentTooltipComponent implements OnInit {
   static moveLeft:number =0
   static moveTop:number =0
    viewComponent:any =null
-  injectorData: Injector
+  injectorData: Injector =  Injector.NULL;
   viewPortWidthHalf = window.innerWidth/2
   @Input() set componentData(val: any) {
+    console.log(val)
     this.viewComponent = val.component
     this.data = val?.data;
     this.position = val?.position;
     this.setMoveLeft(Number(val.moveLeft));
     this.setMoveTop(Number(val.moveTop)?Number(val.moveTop):0)
-  }
-  constructor(private inj: Injector) {
     this.injectorData = Injector.create([{
       provide:token,
-      useValue: JSON.stringify(this.data)
+      useValue: this.data
     }], this.inj)
+  }
+  constructor(private inj: Injector) {
+    // this.injectorData = Injector.create([{
+    //   provide:token,
+    //   useValue: this.data
+    // }], this.inj)
   }
 
   get getComponent(): any {

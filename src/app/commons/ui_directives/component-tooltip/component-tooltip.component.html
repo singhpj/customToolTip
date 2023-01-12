@@ -5,5 +5,7 @@
      [style.top]="getMoveTop+'px'"
      [style]="'--custHeight:'+(getMoveTop )+'px; --custWidth:'+(getMoveLeft)+'px'"
 >
-  <ng-container *ngComponentOutlet="getComponent ; injector: this.injectorData" ></ng-container>
+  <div class="component-container">
+    <ng-container *ngComponentOutlet="getComponent ; injector: this.injectorData" ></ng-container>
+  </div>
 </div>

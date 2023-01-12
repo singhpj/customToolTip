@@ -20,8 +20,22 @@
     </div>
 
   </div>
+  <div class="input_container">
+    <h3>Show Delay</h3>
+    <input  type="number" [(ngModel)]="showDelay"/>
+  </div>
+  <div class="input_container">
+    <h3>Hide Delay</h3>
+    <input type="number" [(ngModel)]="hideDelay"/>
+  </div>
 
   <div class="tool_tip_display_section">
-    <p [componentTooltip]="{component:template,  userData:['name'],position:position }">Some text goes here</p>
+    <span class="data"  *ngFor="let animal of animalData" [componentTooltip]="{
+      component: template,
+      userData: animal,
+      position: position ,
+      showDelay: showDelay,
+      hideDelay: hideDelay
+    }">{{animal.name | titlecase}}</span>
   </div>
 </div>

@@ -1,11 +1,9 @@
 #demo{
   display: flex;
   flex-direction: column;
-  align-content: center;
-  //overflow: auto ;
+  align-items: center;
   max-height: 600px;
   max-width: 400px;
-  //min-height: 0;
   padding: 12px;
   .profile_image{
     max-height: 100px;

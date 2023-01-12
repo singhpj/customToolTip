@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, Injector, OnDestroy, OnInit} from '@angular/core';
 import {token} from "../commons/ui_directives/component-tooltip/component-tooltip.component";
 
 @Component({
@@ -6,13 +6,20 @@ import {token} from "../commons/ui_directives/component-tooltip/component-toolti
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.scss']
 })
-export class DemoComponent implements OnInit {
+export class DemoComponent implements OnInit, OnDestroy {
   data:any =null;
     constructor(private injectedData: Injector) {
-      this.data=this.injectedData.get(token)
+      this.data=JSON.parse(this.injectedData.get(token))
+      console.log(1,this.data)
   }
 
   ngOnInit(): void {
   }
+
+  ngOnDestroy(): void {
+    console.log('hi')
+    this.data = null
+  }
+
 
 }

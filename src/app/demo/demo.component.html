@@ -1,12 +1,10 @@
 <div id="demo">
   <div class="profile_image">
-    <img src="./assets/images/dog.jpg">
+    <img [src]="data?.url">
   </div>
   <div class="details">
-    <h3 class="title">Dog</h3>
-    <p class="content">The dog is a domesticated
-      descendant of the wolf. Also called the domestic dog, it is derived from the extinct Pleistocene wolf, and the modern wolf is the dog's nearest living relative. Dogs were the first species to be domesticated
-      by hunter-gatherers over 15,000 years ago before the development of agriculture.</p>
+    <h3 class="title">{{data?.name}}</h3>
+    <p class="content">{{data?.details}}</p>
   </div>
 </div>
 

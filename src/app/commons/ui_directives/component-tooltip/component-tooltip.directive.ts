@@ -1,10 +1,10 @@
-import {ComponentRef, Directive, ElementRef, HostListener, Input, ViewContainerRef } from '@angular/core';
+import {ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, ViewContainerRef } from '@angular/core';
 import { ComponentTooltipComponent } from './component-tooltip.component';
 
 @Directive({
   selector: '[componentTooltip]'
 })
-export class ComponentTooltipDirective {
+export class ComponentTooltipDirective implements OnDestroy{
   private componentRef: any = null;
   private userData: any = null;
   private position: 'above' | 'below' | 'left' | 'right' = 'below';
@@ -18,6 +18,7 @@ export class ComponentTooltipDirective {
     showDelay?: number,
     hideDelay?:number
   }) {
+    console.log(values?.userData)
       this.componentRef = values?.component;
       this.position = values.position?values.position:'below';
       this.showDelay = values.showDelay?values.showDelay:0;
@@ -104,7 +105,7 @@ export class ComponentTooltipDirective {
       this.toolTipRef?.setInput('componentData', {
         component: this.componentRef,
         position: this.position,
-        data: this.userData,
+        data: JSON.stringify(this.userData),
         moveLeft: moveLeft,
         moveTop: moveTop
       })
@@ -114,9 +115,26 @@ export class ComponentTooltipDirective {
   }
 
   destroyTooltip(): void{
+    // this.toolTipRef?.setInput('componentData', {
+    //   component: this.componentRef,
+    //   position: this.position,
+    //   data: JSON.stringify(''),
+    //   moveLeft: 0,
+    //   moveTop: 0
+    // })
+    // this.componentRef = null;
+    // this.position ='below';
+    // this.showDelay = 0;
+    // this.hideDelay = 1
+    // this.userData = ''
+
     this.toolTipRef?.destroy()
     this.viewContainerRef.clear()
     window.clearInterval(this.timer)
   }
+  ngOnDestroy(): void {
+    this.destroyTooltip();
+  }
+
 }
 

@@ -1,6 +1,5 @@
 
 .tooltip{
-  //content: var(--custHeight);
   position: fixed;
   padding: 4px 8px;
   border: 1px solid whitesmoke;
@@ -8,10 +7,10 @@
   background-color: whitesmoke;
   box-shadow: 4px 5px 5px gray;
   opacity: 0;
-  overflow: auto;
-  box-sizing: border-box;
-  max-height: var(--custHeight);
-  max-width: var(--custWidth);
+  // max-height: max(calc(var(--custHeight) - 100px), 100px);
+  // max-width: max(calc(var(--custWidth) - 100px), 100px);
+  max-height: calc(var(--custHeight) - 100px);
+    max-width: calc(var(--custWidth) - 100px);
   &.show {
     opacity: 1;
     transition: opacity 800ms;
@@ -36,7 +35,7 @@
     }
    }
    &_left{
-    transform:translate(calc(-100% - 12px), -50%);
+    transform:translate(calc(-100% - 10px), -50%);
     &::before{
       border-top-color: transparent;
       border-bottom-color: transparent;
@@ -66,5 +65,17 @@
       left: calc(50% - 10px);
       bottom: -10px;
     }
+   }
+
+   .component-container{
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+    // max-height: max(calc(var(--custHeight) - 200px), 100px);
+    // max-width: max(calc(var(--custWidth) - 200), 100px);
+    max-height: calc(var(--custHeight) - 100px);
+    max-width: calc(var(--custWidth) - 100px);
+    box-sizing: border-box;
+    overflow: auto;
    }
 }
